@@ -21,11 +21,11 @@
       <div class="toolbar"><label for="period" class="sr-only">Date range</label><select id="period"><option value="30d">Last 30 days</option><option value="7d">Last 7 days</option><option value="90d">Last 90 days</option><option value="bnr">Since B&amp;R</option><option value="set">Since set</option></select><button id="refresh" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 11-1l3 6M4 12l3 6a7 7 0 0 0 11-1"/></svg><span>Refresh</span></button></div>
     </section>
     <section aria-labelledby="table-title">
-      <div class="table-heading"><h2 id="table-title">Archetype popularity</h2><span id="count"></span></div>
+      <div class="table-heading"><h2 id="table-title">Archetype popularity</h2><div class="table-controls"><label class="favorites-filter"><input id="favorites-only" type="checkbox"> Favorites only</label><span id="count"></span></div></div>
       <div class="table-wrap">
         <table aria-labelledby="table-title">
-          <colgroup><col class="colors-col"><col class="name-col"><col class="share-col"><col class="decks-col"><col class="price-col"></colgroup>
-          <thead><tr><th scope="col" class="colors-cell"><span class="sr-only">Colors</span></th><th scope="col">Archetype</th><th scope="col" class="numeric">Meta share</th><th scope="col" class="numeric">Decks</th><th scope="col" class="numeric">Price</th></tr></thead>
+          <colgroup><col class="star-col"><col class="colors-col"><col class="name-col"><col class="share-col"><col class="decks-col"><col class="price-col"></colgroup>
+          <thead><tr><th scope="col" class="star-heading"><span class="sr-only">Favorite</span></th><th scope="col" class="colors-cell"><span class="sr-only">Colors</span></th><th scope="col">Archetype</th><th scope="col" class="numeric">Meta share</th><th scope="col" class="numeric">Decks</th><th scope="col" class="numeric">Price</th></tr></thead>
           <tbody id="rows"></tbody>
         </table>
       </div>

@@ -5,9 +5,23 @@ const status = document.querySelector('#status');
 const rows = document.querySelector('#rows');
 const period = document.querySelector('#period');
 const refresh = document.querySelector('#refresh');
+const favoritesOnly = document.querySelector('#favorites-only');
 const money = new Intl.NumberFormat('en-IE', {style: 'currency', currency: 'EUR'});
 const COLOR_NAMES = {W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green'};
 let activeRequest;
+let currentItems = [];
+const FAVORITES_KEY = 'pauper-meta-favorites-v1';
+function readFavorites() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY));
+    return new Set(Array.isArray(saved) ? saved.filter(value => typeof value === 'string') : []);
+  } catch { return new Set(); }
+}
+const favorites = readFavorites();
+function saveFavorites() {
+  try { localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites])); } catch { /* Storage may be disabled. */ }
+}
+function favoriteKey(deck) { return deck.name.trim().toLocaleLowerCase(); }
 
 function archetypeURL(href) {
   const url = new URL(href, SOURCE);
@@ -82,10 +96,26 @@ function manaIcons(deck) {
 }
 
 function render(items) {
+  currentItems = items;
+  const visibleItems = favoritesOnly.checked ? items.filter(deck => favorites.has(favoriteKey(deck))) : items;
   const maxShare = Math.max(...items.map(deck => deck.share), 1);
-  document.querySelector('#count').textContent = `${items.length} archetypes`;
-  rows.replaceChildren(...items.map(deck => {
+  document.querySelector('#count').textContent = favoritesOnly.checked
+    ? `${visibleItems.length} of ${items.length} archetypes`
+    : `${items.length} archetypes`;
+  rows.replaceChildren(...visibleItems.map(deck => {
     const tr = document.createElement('tr');
+    const isFavorite = favorites.has(favoriteKey(deck));
+    if (isFavorite) tr.classList.add('is-favorite');
+    const favoriteCell = document.createElement('td');
+    favoriteCell.className = 'favorite-cell';
+    const favoriteButton = document.createElement('button');
+    favoriteButton.type = 'button';
+    favoriteButton.className = 'favorite-toggle';
+    favoriteButton.dataset.favoriteKey = favoriteKey(deck);
+    favoriteButton.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${deck.name} ${isFavorite ? 'from' : 'to'} favorites`);
+    favoriteButton.setAttribute('aria-pressed', String(isFavorite));
+    favoriteButton.textContent = isFavorite ? '★' : '☆';
+    favoriteCell.append(favoriteButton);
     const colors = document.createElement('td');
     colors.className = 'colors-cell';
     colors.append(manaIcons(deck));
@@ -120,7 +150,7 @@ function render(items) {
     const price = document.createElement('td');
     price.className = 'price';
     price.textContent = deck.price === null ? '—' : `${deck.incompletePrice ? '≥ ' : ''}${money.format(deck.price)}`;
-    tr.append(colors, name, share, decks, price);
+    tr.append(favoriteCell, colors, name, share, decks, price);
     return tr;
   }));
 }
@@ -175,7 +205,7 @@ async function load() {
 // Table row positioning varies between browsers; handle clicks on every cell
 // explicitly while keeping the real link for keyboard and context-menu access.
 function openRow(event) {
-  if (event.defaultPrevented || event.target.closest('a') ||
+  if (event.defaultPrevented || event.target.closest('a, button') ||
       (event.type === 'click' ? event.button !== 0 : event.button !== 1) ||
       !window.getSelection().isCollapsed) return;
   const link = event.target.closest('tr')?.querySelector('.deck-link');
@@ -190,6 +220,17 @@ function openRow(event) {
 
 rows.addEventListener('click', openRow);
 rows.addEventListener('auxclick', openRow);
+rows.addEventListener('click', event => {
+  const button = event.target.closest('.favorite-toggle');
+  if (!button) return;
+  const deck = currentItems.find(item => favoriteKey(item) === button.dataset.favoriteKey);
+  if (!deck) return;
+  const key = favoriteKey(deck);
+  if (favorites.has(key)) favorites.delete(key); else favorites.add(key);
+  saveFavorites();
+  render(currentItems);
+});
+favoritesOnly.addEventListener('change', () => render(currentItems));
 period.addEventListener('change', load);
 refresh.addEventListener('click', load);
 load();
