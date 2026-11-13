@@ -102,7 +102,7 @@ function render(items) {
   document.querySelector('#count').textContent = favoritesOnly.checked
     ? `${visibleItems.length} of ${items.length} archetypes`
     : `${items.length} archetypes`;
-  rows.replaceChildren(...visibleItems.map(deck => {
+  const renderedRows = visibleItems.map(deck => {
     const tr = document.createElement('tr');
     const isFavorite = favorites.has(favoriteKey(deck));
     if (isFavorite) tr.classList.add('is-favorite');
@@ -152,7 +152,19 @@ function render(items) {
     price.textContent = deck.price === null ? '—' : `${deck.incompletePrice ? '≥ ' : ''}${money.format(deck.price)}`;
     tr.append(favoriteCell, colors, name, share, decks, price);
     return tr;
-  }));
+  });
+  if (favoritesOnly.checked && visibleItems.length === 0) {
+    const emptyRow = document.createElement('tr');
+    const emptyCell = document.createElement('td');
+    emptyCell.className = 'favorite-empty';
+    emptyCell.colSpan = 6;
+    emptyCell.textContent = items.length
+      ? 'No favorite decks yet. Tap a star to add a deck.'
+      : 'No decks are available for this date range.';
+    emptyRow.append(emptyCell);
+    renderedRows.push(emptyRow);
+  }
+  rows.replaceChildren(...renderedRows);
 }
 
 function readCache(key) {
