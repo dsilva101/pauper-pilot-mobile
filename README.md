@@ -4,7 +4,7 @@ A mobile-first GitHub Pages view of PauperPilot’s archetype popularity table. 
 
 ## Data source
 
-The website fetches PauperPilot’s server-rendered HTML through the public [AllOrigins raw CORS proxy](https://allorigins.win/). It reads the table’s `data-share` and `data-price` attributes and canonical archetype anchors in the browser. Remote HTML is parsed in an inert template; only validated links and text are rendered. The aggregate “Other” row is omitted because it has no archetype page.
+The website fetches PauperPilot’s server-rendered HTML through the public [AllOrigins raw CORS proxy](https://allorigins.win/). It reads the table’s popularity, deck counts, prices, colors, splash markers, and canonical archetype anchors in the browser. Colored bars show each share relative to the most popular archetype. Remote HTML is parsed in an inert template; only validated links and text are rendered. The aggregate “Other” row is omitted because it has no archetype page.
 
 No GitHub Actions, API key, build step, or hosted backend of your own is required. Live updates depend on AllOrigins being available and able to fetch PauperPilot. The proxy may return cached upstream data; the displayed retrieval time is not the source’s update time. Requests go through that third-party service. Successful results are saved per date range in the browser’s local storage and shown with a clear saved-data message if a later refresh fails. A first visit requires network access and a working proxy.
 
@@ -12,7 +12,9 @@ PauperPilot also exposes `/data/30d/reference-lists.json`, but both that resourc
 
 ## Publish with GitHub Pages
 
-Push the repository and enable Pages from your publishing branch’s root directory. The site consists of `index.html` and `app.js`. It loads all five date ranges directly through AllOrigins and does not require JSON snapshots.
+Push the repository and enable Pages from your publishing branch’s root directory. The site uses `index.html`, `styles.css`, `app.js`, and the bundled mana icons in `assets/`. It loads all five date ranges directly through AllOrigins and does not require JSON snapshots.
+
+Mana glyph attribution is recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Local use
 

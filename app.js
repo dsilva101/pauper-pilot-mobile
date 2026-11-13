@@ -6,6 +6,7 @@ const rows = document.querySelector('#rows');
 const period = document.querySelector('#period');
 const refresh = document.querySelector('#refresh');
 const money = new Intl.NumberFormat('en-IE', {style: 'currency', currency: 'EUR'});
+const COLOR_NAMES = {W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green'};
 let activeRequest;
 
 function archetypeURL(href) {
@@ -22,7 +23,10 @@ function validate(items) {
   for (const item of items) {
     if (!item || typeof item.name !== 'string' || !item.name.trim() ||
         !Number.isFinite(item.share) || item.share < 0 || item.share > 100 ||
-        (item.price !== null && (!Number.isFinite(item.price) || item.price < 0))) {
+        (item.price !== null && (!Number.isFinite(item.price) || item.price < 0)) ||
+        !Number.isSafeInteger(item.decks) || item.decks < 0 ||
+        typeof item.colors !== 'string' || !/^[WUBRG]*$/.test(item.colors) ||
+        typeof item.splash !== 'string' || !/^[WUBRG]*$/.test(item.splash)) {
       throw new Error('Invalid archetype data');
     }
     const url = archetypeURL(item.href);
@@ -40,44 +44,90 @@ function parseTable(html) {
   for (const row of template.content.querySelectorAll('tbody tr[data-meta-row]')) {
     const link = row.querySelector('a[href]');
     if (!link) continue; // The aggregate "Other" row has no destination.
+    const deckCount = row.cells[3]?.textContent.trim().replace(/,/g, '');
     items.push({
       name: row.dataset.name || link.textContent.trim(),
       href: archetypeURL(link.getAttribute('href')),
       share: row.dataset.share?.trim() ? Number(row.dataset.share) : NaN,
       price: row.dataset.price?.trim() ? Number(row.dataset.price) : null,
+      decks: /^\d+$/.test(deckCount || '') ? Number(deckCount) : NaN,
+      colors: row.dataset.colors || '',
+      splash: row.dataset.splash || '',
       incompletePrice: /≥/.test(row.textContent)
     });
   }
   return validate(items);
 }
 
+function manaIcons(deck) {
+  const icons = document.createElement('span');
+  icons.className = 'mana-icons';
+  icons.setAttribute('role', 'img');
+  const main = [...deck.colors].filter(color => !deck.splash.includes(color));
+  const splash = [...deck.splash];
+  const label = main.map(color => COLOR_NAMES[color]).join(' and ') || 'Colorless';
+  icons.setAttribute('aria-label', label + (splash.length ? `, splashing ${splash.map(color => COLOR_NAMES[color]).join(' and ')}` : ''));
+  for (const color of [...main, ...splash]) {
+    const icon = document.createElement('span');
+    icon.className = `mana mana-${color}${splash.includes(color) ? ' splash' : ''}`;
+    const image = document.createElement('img');
+    image.src = `assets/mana-${color}.svg`;
+    image.alt = '';
+    image.width = 12;
+    image.height = 12;
+    icon.append(image);
+    icons.append(icon);
+  }
+  return icons;
+}
+
 function render(items) {
-  rows.replaceChildren(...items.map((deck, index) => {
+  const maxShare = Math.max(...items.map(deck => deck.share), 1);
+  document.querySelector('#count').textContent = `${items.length} archetypes`;
+  rows.replaceChildren(...items.map(deck => {
     const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.colSpan = 3;
+    const colors = document.createElement('td');
+    colors.className = 'colors-cell';
+    colors.append(manaIcons(deck));
+    const name = document.createElement('td');
+    name.className = 'name-cell';
+    name.append(manaIcons(deck));
     const link = document.createElement('a');
     link.className = 'deck-link';
     link.href = archetypeURL(deck.href);
-    const name = document.createElement('span');
-    name.className = 'name';
-    name.textContent = `${index + 1}. ${deck.name}`;
-    const share = document.createElement('span');
-    share.className = 'share';
-    share.textContent = `${deck.share.toFixed(1)}%`;
-    const price = document.createElement('span');
+    link.textContent = deck.name;
+    name.append(link);
+    const share = document.createElement('td');
+    share.className = 'share-cell';
+    const shareLayout = document.createElement('span');
+    shareLayout.className = 'share-layout';
+    const track = document.createElement('span');
+    track.className = 'share-track';
+    track.setAttribute('aria-hidden', 'true');
+    const bar = document.createElement('span');
+    const mainColors = [...deck.colors].filter(color => !deck.splash.includes(color));
+    bar.className = `share-bar bar-${mainColors.length > 1 ? 'multi' : mainColors[0] || 'other'}`;
+    bar.style.width = `${deck.share / maxShare * 100}%`;
+    track.append(bar);
+    const percent = document.createElement('span');
+    percent.className = 'share';
+    percent.textContent = `${deck.share.toFixed(1)}%`;
+    shareLayout.append(track, percent);
+    share.append(shareLayout);
+    const decks = document.createElement('td');
+    decks.className = 'decks';
+    decks.textContent = deck.decks.toLocaleString();
+    const price = document.createElement('td');
     price.className = 'price';
     price.textContent = deck.price === null ? '—' : `${deck.incompletePrice ? '≥ ' : ''}${money.format(deck.price)}`;
-    link.append(name, share, price);
-    td.append(link);
-    tr.append(td);
+    tr.append(colors, name, share, decks, price);
     return tr;
   }));
 }
 
 function readCache(key) {
   try {
-    const cached = JSON.parse(localStorage.getItem(`pauper-meta-v1:${key}`));
+    const cached = JSON.parse(localStorage.getItem(`pauper-meta-v2:${key}`));
     if (!cached || !Number.isFinite(Date.parse(cached.fetchedAt))) return null;
     validate(cached.archetypes);
     return cached;
@@ -92,7 +142,10 @@ async function load() {
   const cached = readCache(key);
   const timestamp = snapshot => new Date(snapshot.fetchedAt).toLocaleString();
   if (cached) render(cached.archetypes);
-  else rows.replaceChildren();
+  else {
+    rows.replaceChildren();
+    document.querySelector('#count').textContent = '';
+  }
   status.textContent = cached ? 'Showing saved data · Checking for updates…' : 'Loading PauperPilot via AllOrigins…';
   rows.closest('table').setAttribute('aria-busy', 'true');
   const timer = setTimeout(() => controller.abort(), 30000);
@@ -104,9 +157,9 @@ async function load() {
     const archetypes = parseTable(await response.text());
     if (activeRequest !== controller) return;
     const snapshot = {archetypes, fetchedAt: new Date().toISOString()};
-    try { localStorage.setItem(`pauper-meta-v1:${key}`, JSON.stringify(snapshot)); } catch { /* Storage may be disabled. */ }
+    try { localStorage.setItem(`pauper-meta-v2:${key}`, JSON.stringify(snapshot)); } catch { /* Storage may be disabled. */ }
     render(archetypes);
-    status.textContent = `${archetypes.length} archetypes · Retrieved ${timestamp(snapshot)} · Proxy data may be cached`;
+    status.textContent = `Retrieved ${timestamp(snapshot)} · Proxy data may be cached`;
   } catch (error) {
     if (activeRequest !== controller) return;
     status.textContent = cached
