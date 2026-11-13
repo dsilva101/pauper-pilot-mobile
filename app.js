@@ -172,6 +172,24 @@ async function load() {
   }
 }
 
+// Table row positioning varies between browsers; handle clicks on every cell
+// explicitly while keeping the real link for keyboard and context-menu access.
+function openRow(event) {
+  if (event.defaultPrevented || event.target.closest('a') ||
+      (event.type === 'click' ? event.button !== 0 : event.button !== 1) ||
+      !window.getSelection().isCollapsed) return;
+  const link = event.target.closest('tr')?.querySelector('.deck-link');
+  if (!link) return;
+  if (event.button === 1 || event.ctrlKey || event.metaKey || event.shiftKey) {
+    event.preventDefault();
+    window.open(link.href, '_blank', 'noopener');
+  } else {
+    link.click();
+  }
+}
+
+rows.addEventListener('click', openRow);
+rows.addEventListener('auxclick', openRow);
 period.addEventListener('change', load);
 refresh.addEventListener('click', load);
 load();
