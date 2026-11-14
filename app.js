@@ -202,7 +202,7 @@ function render(items) {
 }
 
 function cacheKey(key) {
-  return activeFormat === 'standard' ? 'standard-meta-v1:paper' : `pauper-meta-v2:${key}`;
+  return activeFormat === 'standard' ? 'standard-meta-v2:paper-full' : `pauper-meta-v2:${key}`;
 }
 
 function readCache(key) {
@@ -244,7 +244,7 @@ async function load() {
   rows.closest('table').setAttribute('aria-busy', 'true');
   const timer = setTimeout(() => controller.abort(), 30000);
   try {
-    const path = standard ? '/metagame/standard' : ROUTES[key];
+    const path = standard ? '/metagame/standard/full' : ROUTES[key];
     const response = await fetch(PROXY + encodeURIComponent(config.source + path), {
       signal: controller.signal, credentials: 'omit'
     });
@@ -316,7 +316,7 @@ function selectFormat() {
     tab.setAttribute('aria-pressed', String(selected));
   }
   for (const link of document.querySelectorAll('#source-link, #footer-source')) {
-    link.href = config.source + (standard ? '/metagame/standard#paper' : '/');
+    link.href = config.source + (standard ? '/metagame/standard/full#paper' : '/');
     link.textContent = `${link.id === 'source-link' ? 'Visit ' : ''}${config.name} ↗`;
   }
   load();
