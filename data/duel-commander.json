@@ -1,0 +1,464 @@
+{
+  "fetchedAt": "2026-11-14T13:47:25.525Z",
+  "archetypes": [
+    {
+      "name": "Aminatou, the Fateshifter",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-aminatou-the-fateshifter#paper",
+      "share": 10.2,
+      "decks": 13,
+      "price": 3081,
+      "colors": "BUW",
+      "splash": ""
+    },
+    {
+      "name": "Tifa Lockhart",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-tifa-lockhart#paper",
+      "share": 6.2,
+      "decks": 8,
+      "price": 671,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Aragorn, King of Gondor",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-aragorn-king-of-gondor#paper",
+      "share": 4.7,
+      "decks": 6,
+      "price": 2227,
+      "colors": "RUW",
+      "splash": ""
+    },
+    {
+      "name": "Cloud, Midgar Mercenary",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-cloud-midgar-mercenary#paper",
+      "share": 4.7,
+      "decks": 6,
+      "price": 1023,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Brigid, Clachan's Heart",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-brigid-clachan-s-heart#paper",
+      "share": 3.9,
+      "decks": 5,
+      "price": 1977,
+      "colors": "GW",
+      "splash": ""
+    },
+    {
+      "name": "Bruse Tarl, Boorish Herder // Yoshimaru, Ever Faithful",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-bruse-tarl-boorish-herder-yoshimaru-ever-faithful#paper",
+      "share": 3.9,
+      "decks": 5,
+      "price": 977,
+      "colors": "RW",
+      "splash": ""
+    },
+    {
+      "name": "Glarb, Calamity's Augur",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-glarb-calamity-s-augur#paper",
+      "share": 3.1,
+      "decks": 4,
+      "price": 3349,
+      "colors": "BGU",
+      "splash": ""
+    },
+    {
+      "name": "Satya, Aetherflux Genius",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-satya-aetherflux-genius#paper",
+      "share": 3.1,
+      "decks": 4,
+      "price": 2242,
+      "colors": "RUW",
+      "splash": ""
+    },
+    {
+      "name": "The Prismatic Piper // Yoshimaru, Ever Faithful",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-the-prismatic-piper-yoshimaru-ever-faithful#paper",
+      "share": 3.1,
+      "decks": 4,
+      "price": 57,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Dargo, the Shipwrecker // Ikra Shidiqi, the Usurper",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-dargo-the-shipwrecker-ikra-shidiqi-the-usurper#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 3258,
+      "colors": "BGR",
+      "splash": ""
+    },
+    {
+      "name": "Jace, Multiverse Architect",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-jace-multiverse-architect#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 4728,
+      "colors": "BRUW",
+      "splash": ""
+    },
+    {
+      "name": "Niv-Mizzet, Parun",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-niv-mizzet-parun#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 820,
+      "colors": "RU",
+      "splash": ""
+    },
+    {
+      "name": "Aerid Konstrari",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-aerid-konstrari#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 1799,
+      "colors": "GR",
+      "splash": ""
+    },
+    {
+      "name": "Vohar, Vodalian Desecrator",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-vohar-vodalian-desecrator#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 2500,
+      "colors": "BU",
+      "splash": ""
+    },
+    {
+      "name": "Kratos, God of War",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-kratos-god-of-war#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 199,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Malcolm, Alluring Scoundrel",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-malcolm-alluring-scoundrel#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 416,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Basim Ibn Ishaq",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-basim-ibn-ishaq#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 1634,
+      "colors": "BU",
+      "splash": ""
+    },
+    {
+      "name": "Phelia, Exuberant Shepherd",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-phelia-exuberant-shepherd#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 986,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Slimefoot and Squee",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-slimefoot-and-squee#paper",
+      "share": 2.3,
+      "decks": 3,
+      "price": 2217,
+      "colors": "BGR",
+      "splash": ""
+    },
+    {
+      "name": "Kraum, Ludevic's Opus // Yoshimaru, Ever Faithful",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-kraum-ludevic-s-opus-yoshimaru-ever-faithful#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 1735,
+      "colors": "RUW",
+      "splash": ""
+    },
+    {
+      "name": "Azusa, Lost but Seeking",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-azusa-lost-but-seeking#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 812,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Ghyrson Starn, Kelermorph",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-ghyrson-starn-kelermorph#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 541,
+      "colors": "RU",
+      "splash": ""
+    },
+    {
+      "name": "Atraxa, Grand Unifier",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-atraxa-grand-unifier#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 4250,
+      "colors": "BGUW",
+      "splash": ""
+    },
+    {
+      "name": "Amalia Benavides Aguirre",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-amalia-benavides-aguirre#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 915,
+      "colors": "BW",
+      "splash": ""
+    },
+    {
+      "name": "Brigone, Soldier of Meletis",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-brigone-soldier-of-meletis#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 49,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Vraska, Soul of Stone",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-vraska-soul-of-stone#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 327,
+      "colors": "RUW",
+      "splash": ""
+    },
+    {
+      "name": "Namor the Sub-Mariner",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-namor-the-sub-mariner#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 348,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Fin Fang Foom",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-fin-fang-foom#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 160,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Sokka, Tenacious Tactician",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-sokka-tenacious-tactician#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 527,
+      "colors": "RUW",
+      "splash": ""
+    },
+    {
+      "name": "Octavia, Living Thesis",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-octavia-living-thesis#paper",
+      "share": 1.6,
+      "decks": 2,
+      "price": 99,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Lord Windgrace",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-lord-windgrace#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1115,
+      "colors": "BGR",
+      "splash": ""
+    },
+    {
+      "name": "Nick Fury, Agent of S.H.I.E.L.D.",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-nick-fury-agent-of-s-h-i-e-l-d#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 6792,
+      "colors": "BGRUW",
+      "splash": ""
+    },
+    {
+      "name": "Thanos, the Mad Titan",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-thanos-the-mad-titan#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 6700,
+      "colors": "BGRUW",
+      "splash": ""
+    },
+    {
+      "name": "Dyadrine, Synthesis Amalgam",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-dyadrine-synthesis-amalgam#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1390,
+      "colors": "GW",
+      "splash": ""
+    },
+    {
+      "name": "Hit-Monkey",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-hit-monkey#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 47,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Killian, Ink Duelist",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-killian-ink-duelist#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 66,
+      "colors": "BW",
+      "splash": ""
+    },
+    {
+      "name": "Raph & Mikey, Troublemakers",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-raph-mikey-troublemakers#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1727,
+      "colors": "GR",
+      "splash": ""
+    },
+    {
+      "name": "Aang, Swift Savior",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-aang-swift-savior#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1386,
+      "colors": "UW",
+      "splash": ""
+    },
+    {
+      "name": "Yawgmoth, Thran Physician",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-yawgmoth-thran-physician#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 463,
+      "colors": "B",
+      "splash": ""
+    },
+    {
+      "name": "Vivi Ornitier",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-vivi-ornitier#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1398,
+      "colors": "RU",
+      "splash": ""
+    },
+    {
+      "name": "Hashaton, Scarab's Fist",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-hashaton-scarab-s-fist#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 438,
+      "colors": "BUW",
+      "splash": ""
+    },
+    {
+      "name": "Kenrith, the Returned King",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-kenrith-the-returned-king#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 7231,
+      "colors": "BGRUW",
+      "splash": ""
+    },
+    {
+      "name": "Marwyn, the Nurturer",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-marwyn-the-nurturer#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 373,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Winter, Cynical Opportunist",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-winter-cynical-opportunist#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1321,
+      "colors": "BG",
+      "splash": ""
+    },
+    {
+      "name": "Goro-Goro and Satoru",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-goro-goro-and-satoru#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 3350,
+      "colors": "BRU",
+      "splash": ""
+    },
+    {
+      "name": "Ral, Monsoon Mage",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-ral-monsoon-mage#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 275,
+      "colors": "RU",
+      "splash": ""
+    },
+    {
+      "name": "Hidetsugu and Kairi",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-hidetsugu-and-kairi#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1678,
+      "colors": "BU",
+      "splash": ""
+    },
+    {
+      "name": "Elminster",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-elminster#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1169,
+      "colors": "UW",
+      "splash": ""
+    },
+    {
+      "name": "Tivit, Seller of Secrets",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-tivit-seller-of-secrets#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 2723,
+      "colors": "BUW",
+      "splash": ""
+    },
+    {
+      "name": "Gut, True Soul Zealot // Veteran Soldier",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-gut-true-soul-zealot-veteran-soldier#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 1916,
+      "colors": "RW",
+      "splash": ""
+    },
+    {
+      "name": "Feldon, Ronom Excavator",
+      "href": "https://www.mtggoldfish.com/archetype/duel_commander-feldon-ronom-excavator#paper",
+      "share": 0.8,
+      "decks": 1,
+      "price": 357,
+      "colors": "R",
+      "splash": ""
+    }
+  ]
+}

@@ -1,7 +1,11 @@
 let activeFormat = 'pauper';
+const GOLDFISH = {source: 'https://www.mtggoldfish.com', name: 'MTGGoldfish', currency: 'USD', goldfish: true};
 const FORMATS = {
-  pauper: {source: 'https://pauperpilot.com', name: 'PauperPilot', currency: 'EUR'},
-  standard: {source: 'https://www.mtggoldfish.com', name: 'MTGGoldfish', currency: 'USD'}
+  pauper: {source: 'https://pauperpilot.com', name: 'PauperPilot', currency: 'EUR', label: 'Pauper'},
+  standard: {...GOLDFISH, label: 'Standard', path: '/metagame/standard/full'},
+  'pauper-gf': {...GOLDFISH, label: 'Pauper-GF', path: '/metagame/pauper/full'},
+  modern: {...GOLDFISH, label: 'Modern', path: '/metagame/modern/full'},
+  'duel-commander': {...GOLDFISH, label: 'Duel Commander', path: '/metagame/duel_commander/full'}
 };
 function formatConfig() { return FORMATS[activeFormat]; }
 const PROXY = 'https://api.allorigins.win/raw?url=';
@@ -30,10 +34,10 @@ function favoriteKey(deck) { return deck.name.trim().toLocaleLowerCase(); }
 
 function archetypeURL(href) {
   const url = new URL(href, formatConfig().source);
-  const validPath = activeFormat === 'standard'
-    ? /^\/archetype\/[-a-z0-9]+$/.test(url.pathname)
+  const validPath = formatConfig().goldfish
+    ? /^\/archetype\/[-a-z0-9_]+$/.test(url.pathname)
     : /^\/(?:7d\/|90d\/|bnr\/|set\/)?archetypes\/[^/]+\/$/.test(url.pathname);
-  if (url.origin !== formatConfig().source || !validPath || url.search || (url.hash && !(activeFormat === 'standard' && url.hash === '#paper'))) {
+  if (url.origin !== formatConfig().source || !validPath || url.search || (url.hash && !(formatConfig().goldfish && url.hash === '#paper'))) {
     throw new Error('Invalid archetype URL');
   }
   return url.href;
@@ -81,7 +85,7 @@ function parseTable(html) {
   return validate(items);
 }
 
-function parseStandard(html) {
+function parseGoldfish(html) {
   const template = document.createElement('template');
   template.innerHTML = html;
   const items = [];
@@ -89,7 +93,7 @@ function parseStandard(html) {
     const link = tile.querySelector('.archetype-tile-title .deck-price-paper a');
     const stats = tile.querySelector('.metagame-percentage .archetype-tile-statistic-value')?.textContent;
     const match = stats?.match(/([\d.]+)\s*%\s*\(([\d,]+)\)/);
-    if (!link || !match) throw new Error('Invalid Standard metagame tile');
+    if (!link || !match) throw new Error('Invalid MTGGoldfish metagame tile');
     const priceText = tile.querySelector('.archetype-tile-statistic.deck-price-paper .archetype-tile-statistic-value')?.textContent;
     const priceMatch = priceText?.match(/\$\s*([\d,]+(?:\.\d+)?)/);
     const colors = [...tile.querySelectorAll('.manacost .ms')]
@@ -181,8 +185,8 @@ function render(items) {
     decks.textContent = deck.decks.toLocaleString();
     const price = document.createElement('td');
     price.className = 'price';
-    const currency = activeFormat === 'standard'
-      ? new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}) : money;
+    const currency = formatConfig().goldfish
+      ? new Intl.NumberFormat('en-US', {style: 'currency', currency: formatConfig().currency}) : money;
     price.textContent = deck.price === null ? '—' : `${deck.incompletePrice ? '≥ ' : ''}${currency.format(deck.price)}`;
     tr.append(favoriteCell, colors, name, share, decks, price);
     return tr;
@@ -202,7 +206,7 @@ function render(items) {
 }
 
 function cacheKey(key) {
-  return activeFormat === 'standard' ? 'standard-meta-v2:paper-full' : `pauper-meta-v2:${key}`;
+  return formatConfig().goldfish ? `${activeFormat}-meta-v2:paper-full` : `pauper-meta-v2:${key}`;
 }
 
 function readCache(key) {
@@ -220,9 +224,9 @@ async function load() {
   activeRequest = controller;
   const key = period.value;
   let cached = readCache(key);
-  if (!cached && activeFormat === 'standard') {
+  if (!cached && formatConfig().goldfish) {
     try {
-      const response = await fetch('data/standard.json', {signal: controller.signal});
+      const response = await fetch(`data/${activeFormat}.json`, {signal: controller.signal});
       if (!response.ok) throw new Error('Snapshot unavailable');
       const bundled = await response.json();
       if (activeRequest !== controller) return;
@@ -239,19 +243,18 @@ async function load() {
     document.querySelector('#count').textContent = '';
   }
   const config = formatConfig();
-  const standard = activeFormat === 'standard';
   status.textContent = cached ? 'Showing saved data · Checking for updates…' : `Loading ${config.name} data…`;
   rows.closest('table').setAttribute('aria-busy', 'true');
   const timer = setTimeout(() => controller.abort(), 30000);
   try {
-    const path = standard ? '/metagame/standard/full' : ROUTES[key];
+    const path = config.goldfish ? config.path : ROUTES[key];
     const response = await fetch(PROXY + encodeURIComponent(config.source + path), {
       signal: controller.signal, credentials: 'omit'
     });
     if (!response.ok) throw new Error(`Proxy returned ${response.status}`);
     const html = await response.text();
     if (activeRequest !== controller) return;
-    const archetypes = standard ? parseStandard(html) : parseTable(html);
+    const archetypes = config.goldfish ? parseGoldfish(html) : parseTable(html);
     const snapshot = {archetypes, fetchedAt: new Date().toISOString()};
     try { localStorage.setItem(cacheKey(key), JSON.stringify(snapshot)); } catch { /* Storage may be disabled. */ }
     render(archetypes);
@@ -300,23 +303,23 @@ favoritesOnly.addEventListener('change', () => render(currentItems));
 function selectFormat() {
   activeRequest?.abort();
   activeRequest = undefined;
-  activeFormat = location.hash === '#standard' ? 'standard' : 'pauper';
+  const requestedFormat = location.hash.slice(1);
+  activeFormat = Object.hasOwn(FORMATS, requestedFormat) ? requestedFormat : 'pauper';
   favorites = readFavorites();
   favoritesOnly.checked = false;
   const config = formatConfig();
-  const standard = activeFormat === 'standard';
-  document.title = `${standard ? 'Standard' : 'Pauper'} · Mobile Meta`;
-  document.querySelector('#eyebrow').textContent = `THE ${activeFormat.toUpperCase()} METAGAME`;
-  document.querySelector('#subtitle').textContent = standard
-    ? 'The most played Standard archetypes, at a glance.' : 'The most played archetypes, at a glance.';
-  period.hidden = standard;
+  document.title = `${config.label} · Mobile Meta`;
+  document.querySelector('#eyebrow').textContent = `THE ${config.label.toUpperCase()} METAGAME`;
+  document.querySelector('#subtitle').textContent = config.goldfish
+    ? `The most played ${activeFormat === 'pauper-gf' ? 'Pauper' : config.label} archetypes, at a glance.` : 'The most played archetypes, at a glance.';
+  period.hidden = Boolean(config.goldfish);
   for (const tab of document.querySelectorAll('.format-tab')) {
     const selected = tab.dataset.format === activeFormat;
     tab.classList.toggle('is-active', selected);
     tab.setAttribute('aria-pressed', String(selected));
   }
   for (const link of document.querySelectorAll('#source-link, #footer-source')) {
-    link.href = config.source + (standard ? '/metagame/standard/full#paper' : '/');
+    link.href = config.source + (config.goldfish ? `${config.path}#paper` : '/');
     link.textContent = `${link.id === 'source-link' ? 'Visit ' : ''}${config.name} ↗`;
   }
   load();

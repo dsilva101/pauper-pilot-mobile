@@ -1,0 +1,545 @@
+{
+  "fetchedAt": "2026-11-14T13:47:25.475Z",
+  "archetypes": [
+    {
+      "name": "Eldrazi Ramp",
+      "href": "https://www.mtggoldfish.com/archetype/modern-eldrazi-ramp#paper",
+      "share": 12.2,
+      "decks": 293,
+      "price": 619,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/modern-affinity#paper",
+      "share": 7.6,
+      "decks": 182,
+      "price": 1204,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Boros Energy",
+      "href": "https://www.mtggoldfish.com/archetype/modern-boros-energy#paper",
+      "share": 5.9,
+      "decks": 142,
+      "price": 986,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Amulet Titan",
+      "href": "https://www.mtggoldfish.com/archetype/amulet-titan#paper",
+      "share": 5.5,
+      "decks": 133,
+      "price": 990,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Rakdos Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-rakdos-midrange#paper",
+      "share": 5.2,
+      "decks": 125,
+      "price": 638,
+      "colors": "BR",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Prowess",
+      "href": "https://www.mtggoldfish.com/archetype/modern-izzet-prowess#paper",
+      "share": 5.2,
+      "decks": 125,
+      "price": 414,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Domain Zoo",
+      "href": "https://www.mtggoldfish.com/archetype/modern-domain-zoo#paper",
+      "share": 4.5,
+      "decks": 108,
+      "price": 766,
+      "colors": "WURG",
+      "splash": ""
+    },
+    {
+      "name": "Ruby Storm",
+      "href": "https://www.mtggoldfish.com/archetype/modern-ruby-storm#paper",
+      "share": 4.1,
+      "decks": 98,
+      "price": 534,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "Esper Blink",
+      "href": "https://www.mtggoldfish.com/archetype/modern-esper-blink#paper",
+      "share": 3.4,
+      "decks": 82,
+      "price": 869,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Jeskai Energy",
+      "href": "https://www.mtggoldfish.com/archetype/modern-jeskai-energy#paper",
+      "share": 3.2,
+      "decks": 78,
+      "price": 880,
+      "colors": "WUR",
+      "splash": ""
+    },
+    {
+      "name": "Eldrazi Tron",
+      "href": "https://www.mtggoldfish.com/archetype/eldrazi-tron#paper",
+      "share": 3.1,
+      "decks": 75,
+      "price": 530,
+      "colors": "",
+      "splash": ""
+    },
+    {
+      "name": "Eldrazi",
+      "href": "https://www.mtggoldfish.com/archetype/modern-eldrazi#paper",
+      "share": 2.8,
+      "decks": 68,
+      "price": 705,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Living End",
+      "href": "https://www.mtggoldfish.com/archetype/modern-living-end#paper",
+      "share": 2.8,
+      "decks": 67,
+      "price": 644,
+      "colors": "WUBRG",
+      "splash": ""
+    },
+    {
+      "name": "Goryo's Vengeance",
+      "href": "https://www.mtggoldfish.com/archetype/modern-goryo-s-vengeance#paper",
+      "share": 2.4,
+      "decks": 58,
+      "price": 937,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Neobrand",
+      "href": "https://www.mtggoldfish.com/archetype/neobrand#paper",
+      "share": 2.3,
+      "decks": 56,
+      "price": 604,
+      "colors": "WUBRG",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-dimir-midrange#paper",
+      "share": 2.2,
+      "decks": 53,
+      "price": 899,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Control",
+      "href": "https://www.mtggoldfish.com/archetype/wu-68d6e340-6601-4aab-9a70-4bdccc013e7e#paper",
+      "share": 1.9,
+      "decks": 46,
+      "price": 882,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "Tron",
+      "href": "https://www.mtggoldfish.com/archetype/tron#paper",
+      "share": 1.7,
+      "decks": 41,
+      "price": 578,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Mono-Black Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-mono-black-midrange#paper",
+      "share": 1.5,
+      "decks": 36,
+      "price": 734,
+      "colors": "B",
+      "splash": ""
+    },
+    {
+      "name": "Yawgmoth",
+      "href": "https://www.mtggoldfish.com/archetype/modern-yawgmoth-9bd3dc9a-1da1-442e-9b88-6ef2a027e80b#paper",
+      "share": 1.4,
+      "decks": 35,
+      "price": 940,
+      "colors": "WBRG",
+      "splash": ""
+    },
+    {
+      "name": "Grixis Reanimator",
+      "href": "https://www.mtggoldfish.com/archetype/modern-grixis-reanimator#paper",
+      "share": 1.4,
+      "decks": 34,
+      "price": 494,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Belcher",
+      "href": "https://www.mtggoldfish.com/archetype/modern-belcher-e9e93d4f-ed4a-44f6-9173-f8bd560e3900#paper",
+      "share": 1.2,
+      "decks": 30,
+      "price": 438,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Mono-Green Basking Broodscale Combo",
+      "href": "https://www.mtggoldfish.com/archetype/modern-mono-green-basking-broodscale-combo#paper",
+      "share": 1.2,
+      "decks": 28,
+      "price": 773,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Boros Burn",
+      "href": "https://www.mtggoldfish.com/archetype/modern-boros-burn#paper",
+      "share": 1.1,
+      "decks": 27,
+      "price": 268,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Living End",
+      "href": "https://www.mtggoldfish.com/archetype/living-end#paper",
+      "share": 1,
+      "decks": 24,
+      "price": 680,
+      "colors": "UBG",
+      "splash": ""
+    },
+    {
+      "name": "Esper Reanimator",
+      "href": "https://www.mtggoldfish.com/archetype/modern-esper-reanimator#paper",
+      "share": 1,
+      "decks": 23,
+      "price": 856,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Murktide",
+      "href": "https://www.mtggoldfish.com/archetype/modern-dimir-murktide#paper",
+      "share": 0.9,
+      "decks": 22,
+      "price": 787,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Indomitable Creativity",
+      "href": "https://www.mtggoldfish.com/archetype/modern-indomitable-creativity#paper",
+      "share": 0.8,
+      "decks": 20,
+      "price": 754,
+      "colors": "WUBRG",
+      "splash": ""
+    },
+    {
+      "name": "Temur Prowess",
+      "href": "https://www.mtggoldfish.com/archetype/modern-temur-prowess#paper",
+      "share": 0.8,
+      "decks": 19,
+      "price": 399,
+      "colors": "URG",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Murktide",
+      "href": "https://www.mtggoldfish.com/archetype/modern-izzet-murktide#paper",
+      "share": 0.7,
+      "decks": 17,
+      "price": 614,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Selesnya Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-selesnya-midrange#paper",
+      "share": 0.6,
+      "decks": 15,
+      "price": 817,
+      "colors": "WG",
+      "splash": ""
+    },
+    {
+      "name": "Death's Shadow",
+      "href": "https://www.mtggoldfish.com/archetype/modern-death-s-shadow-472#paper",
+      "share": 0.5,
+      "decks": 12,
+      "price": 760,
+      "colors": "BR",
+      "splash": ""
+    },
+    {
+      "name": "Boros Ponza",
+      "href": "https://www.mtggoldfish.com/archetype/modern-boros-ponza#paper",
+      "share": 0.5,
+      "decks": 12,
+      "price": 321,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Grixis Control",
+      "href": "https://www.mtggoldfish.com/archetype/modern-grixis-control#paper",
+      "share": 0.4,
+      "decks": 10,
+      "price": 753,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Hammer Time",
+      "href": "https://www.mtggoldfish.com/archetype/modern-hammer-time#paper",
+      "share": 0.4,
+      "decks": 10,
+      "price": 863,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "The Rock",
+      "href": "https://www.mtggoldfish.com/archetype/the-rock#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 1079,
+      "colors": "BG",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Blink",
+      "href": "https://www.mtggoldfish.com/archetype/modern-azorius-blink#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 842,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "Mono-Green Eldrazi",
+      "href": "https://www.mtggoldfish.com/archetype/modern-mono-green-eldrazi#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 900,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Hardened Scales",
+      "href": "https://www.mtggoldfish.com/archetype/g#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 904,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Sam Combo",
+      "href": "https://www.mtggoldfish.com/archetype/modern-sam-combo#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 604,
+      "colors": "WUBG",
+      "splash": ""
+    },
+    {
+      "name": "Song of Creation",
+      "href": "https://www.mtggoldfish.com/archetype/modern-song-of-creation#paper",
+      "share": 0.3,
+      "decks": 8,
+      "price": 1852,
+      "colors": "URG",
+      "splash": ""
+    },
+    {
+      "name": "Titan Shift",
+      "href": "https://www.mtggoldfish.com/archetype/modern-titan-shift#paper",
+      "share": 0.3,
+      "decks": 8,
+      "price": 832,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Generic Ragavan",
+      "href": "https://www.mtggoldfish.com/archetype/modern-generic-ragavan#paper",
+      "share": 0.3,
+      "decks": 8,
+      "price": 535,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "4c HollowOne",
+      "href": "https://www.mtggoldfish.com/archetype/modern-4c-hollowone#paper",
+      "share": 0.3,
+      "decks": 8,
+      "price": 418,
+      "colors": "WBRG",
+      "splash": ""
+    },
+    {
+      "name": "Through the Breach",
+      "href": "https://www.mtggoldfish.com/archetype/modern-through-the-breach#paper",
+      "share": 0.3,
+      "decks": 7,
+      "price": 726,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Grixis Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-grixis-midrange#paper",
+      "share": 0.3,
+      "decks": 7,
+      "price": 855,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Devoted Combo",
+      "href": "https://www.mtggoldfish.com/archetype/modern-devoted-combo#paper",
+      "share": 0.3,
+      "decks": 7,
+      "price": 1018,
+      "colors": "WBG",
+      "splash": ""
+    },
+    {
+      "name": "Gruul Basking Broodscale Combo",
+      "href": "https://www.mtggoldfish.com/archetype/modern-gruul-basking-broodscale-combo#paper",
+      "share": 0.2,
+      "decks": 6,
+      "price": 610,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "Bant Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-bant-midrange#paper",
+      "share": 0.2,
+      "decks": 5,
+      "price": 684,
+      "colors": "WUG",
+      "splash": ""
+    },
+    {
+      "name": "Gruul Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/red-green-midrange#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 634,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "Esper Control",
+      "href": "https://www.mtggoldfish.com/archetype/esper-control-76ae2abf-cf6d-45f1-aec6-c04085130a05#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 951,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Mill",
+      "href": "https://www.mtggoldfish.com/archetype/modern-mill#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 448,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "4/5c Omnath",
+      "href": "https://www.mtggoldfish.com/archetype/modern-4-5c-omnath#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 1225,
+      "colors": "WURG",
+      "splash": ""
+    },
+    {
+      "name": "IzzetControl",
+      "href": "https://www.mtggoldfish.com/archetype/modern-izzetcontrol#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 726,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Orzhov Blink",
+      "href": "https://www.mtggoldfish.com/archetype/modern-orzhov-blink#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 696,
+      "colors": "WB",
+      "splash": ""
+    },
+    {
+      "name": "Simic Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/modern-simic-midrange#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 682,
+      "colors": "UG",
+      "splash": ""
+    },
+    {
+      "name": "Rakdos Aggro",
+      "href": "https://www.mtggoldfish.com/archetype/modern-rakdos-aggro#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 431,
+      "colors": "BR",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Reanimator",
+      "href": "https://www.mtggoldfish.com/archetype/modern-dimir-reanimator#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 607,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Mono-White Control",
+      "href": "https://www.mtggoldfish.com/archetype/modern-mono-white-control#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 274,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Control",
+      "href": "https://www.mtggoldfish.com/archetype/modern-izzet-control-049680df-6556-4f5c-a131-28ffc7be8291#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 634,
+      "colors": "UR",
+      "splash": ""
+    }
+  ]
+}

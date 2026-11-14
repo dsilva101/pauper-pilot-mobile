@@ -1,0 +1,545 @@
+{
+  "fetchedAt": "2026-11-14T13:47:25.425Z",
+  "archetypes": [
+    {
+      "name": "Mono Red Madness",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-red-madness#paper",
+      "share": 14.8,
+      "decks": 311,
+      "price": 86,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Blue Terror",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-blue-terror-2b4f6710-ccb2-4660-b5f9-ea85c8875ec5#paper",
+      "share": 8.4,
+      "decks": 177,
+      "price": 97,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Faeries",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-dimir-faeries-625747e4-1ba6-4401-af7b-5c8033a12c6c#paper",
+      "share": 7.2,
+      "decks": 152,
+      "price": 105,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Tron",
+      "href": "https://www.mtggoldfish.com/archetype/tron-c244ab01-c9e3-400d-8db1-6d717616b7e2#paper",
+      "share": 5.6,
+      "decks": 119,
+      "price": 90,
+      "colors": "WRG",
+      "splash": ""
+    },
+    {
+      "name": "Ruby Storm",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-ruby-storm#paper",
+      "share": 4.7,
+      "decks": 100,
+      "price": 180,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "Bogles",
+      "href": "https://www.mtggoldfish.com/archetype/bogles-df219f8f-1b57-437c-b4d8-dd4a5c7bdd7c#paper",
+      "share": 4.6,
+      "decks": 96,
+      "price": 55,
+      "colors": "WRG",
+      "splash": ""
+    },
+    {
+      "name": "Elves",
+      "href": "https://www.mtggoldfish.com/archetype/elves-67156d3a-d400-4269-8400-3a0258a274b3#paper",
+      "share": 4.4,
+      "decks": 92,
+      "price": 73,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Spy Combo",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-spy-combo#paper",
+      "share": 4.3,
+      "decks": 91,
+      "price": 115,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Grixis Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-grixis-affinity#paper",
+      "share": 4.2,
+      "decks": 88,
+      "price": 142,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Mono Red Rally",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-red-rally#paper",
+      "share": 3.8,
+      "decks": 81,
+      "price": 84,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Esper Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-esper-affinity#paper",
+      "share": 2.9,
+      "decks": 62,
+      "price": 109,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Grixis Control",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-grixis-control-334e14c5-6fe9-46da-9c9b-799ef8bd1f0f#paper",
+      "share": 2.6,
+      "decks": 54,
+      "price": 120,
+      "colors": "UBR",
+      "splash": ""
+    },
+    {
+      "name": "Boros Moxite",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-boros-moxite#paper",
+      "share": 2.5,
+      "decks": 53,
+      "price": 113,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Control",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-dimir-control-1e2279c1-d135-4609-8b99-83f2ab98c424#paper",
+      "share": 2.1,
+      "decks": 45,
+      "price": 89,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Jund Wildfire",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-jund-wildfire#paper",
+      "share": 2.1,
+      "decks": 44,
+      "price": 86,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Golgari Gardens",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-golgari-gardens#paper",
+      "share": 2.1,
+      "decks": 44,
+      "price": 71,
+      "colors": "BG",
+      "splash": ""
+    },
+    {
+      "name": "Rakdos Madness",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-rakdos-madness#paper",
+      "share": 1.7,
+      "decks": 35,
+      "price": 52,
+      "colors": "BR",
+      "splash": ""
+    },
+    {
+      "name": "Turbo Fog",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-turbo-fog-fe589501-15e6-4511-b259-e066f9f36c51#paper",
+      "share": 1.6,
+      "decks": 34,
+      "price": 98,
+      "colors": "UG",
+      "splash": ""
+    },
+    {
+      "name": "Mono-Blue Faeries",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-blue-faeries-f7d232c7-2c3c-4459-b219-f3e8d9abbec6#paper",
+      "share": 1.4,
+      "decks": 30,
+      "price": 61,
+      "colors": "U",
+      "splash": ""
+    },
+    {
+      "name": "Ephemerate Tron",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-ephemerate-tron#paper",
+      "share": 1.3,
+      "decks": 27,
+      "price": 76,
+      "colors": "WURG",
+      "splash": ""
+    },
+    {
+      "name": "Gruul Ponza",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-gruul-ponza#paper",
+      "share": 1.2,
+      "decks": 26,
+      "price": 85,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "Familiars",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-familiars#paper",
+      "share": 1.2,
+      "decks": 26,
+      "price": 81,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "Snacker Gates",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-snacker-gates#paper",
+      "share": 1.1,
+      "decks": 24,
+      "price": 118,
+      "colors": "WRG",
+      "splash": ""
+    },
+    {
+      "name": "Black Sacrifice",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-black-sacrifice#paper",
+      "share": 1,
+      "decks": 22,
+      "price": 56,
+      "colors": "B",
+      "splash": ""
+    },
+    {
+      "name": "Jeskai Ephemerate",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-jeskai-ephemerate#paper",
+      "share": 1,
+      "decks": 21,
+      "price": 102,
+      "colors": "WUR",
+      "splash": ""
+    },
+    {
+      "name": "White Aggro",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-white-aggro#paper",
+      "share": 1,
+      "decks": 20,
+      "price": 77,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Food Gardens",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-food-gardens#paper",
+      "share": 0.8,
+      "decks": 17,
+      "price": 76,
+      "colors": "BG",
+      "splash": ""
+    },
+    {
+      "name": "Mono-White Aggro",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-white-aggro-6b67ea64-5bde-42ea-8d1a-93578d3e3f3c#paper",
+      "share": 0.7,
+      "decks": 15,
+      "price": 48,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Inside Out Combo",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-inside-out-combo#paper",
+      "share": 0.7,
+      "decks": 15,
+      "price": 72,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-dimir-affinity#paper",
+      "share": 0.7,
+      "decks": 14,
+      "price": 101,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Dredge",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-dredge#paper",
+      "share": 0.6,
+      "decks": 12,
+      "price": 44,
+      "colors": "WBRG",
+      "splash": ""
+    },
+    {
+      "name": "Boros Synthesizer",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-boros-synthesizer#paper",
+      "share": 0.6,
+      "decks": 12,
+      "price": 82,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Terror",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-izzet-terror#paper",
+      "share": 0.6,
+      "decks": 12,
+      "price": 102,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Esper Ephemerate",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-esper-ephemerate#paper",
+      "share": 0.5,
+      "decks": 10,
+      "price": 116,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Cycle Storm",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-cycle-storm#paper",
+      "share": 0.5,
+      "decks": 10,
+      "price": 220,
+      "colors": "WUBR",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Gates",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-azorius-gates#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 149,
+      "colors": "WUR",
+      "splash": ""
+    },
+    {
+      "name": "Burn",
+      "href": "https://www.mtggoldfish.com/archetype/burn-3854fe58-5ff9-4046-bac9-ae9617c3caf5#paper",
+      "share": 0.4,
+      "decks": 9,
+      "price": 65,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "4c Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-4c-affinity#paper",
+      "share": 0.4,
+      "decks": 8,
+      "price": 154,
+      "colors": "WUBR",
+      "splash": ""
+    },
+    {
+      "name": "Mardu Synthesizer",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mardu-synthesizer#paper",
+      "share": 0.4,
+      "decks": 8,
+      "price": 84,
+      "colors": "WBR",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Terror",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-dimir-terror#paper",
+      "share": 0.3,
+      "decks": 6,
+      "price": 97,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Boros Bully",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-boros-bully#paper",
+      "share": 0.3,
+      "decks": 6,
+      "price": 64,
+      "colors": "W",
+      "splash": ""
+    },
+    {
+      "name": "Glintblade",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-glintblade#paper",
+      "share": 0.3,
+      "decks": 6,
+      "price": 76,
+      "colors": "WB",
+      "splash": ""
+    },
+    {
+      "name": "Slivers",
+      "href": "https://www.mtggoldfish.com/archetype/slivers-6450c9cf-71aa-44e3-b57b-3e554f86ba6a#paper",
+      "share": 0.2,
+      "decks": 5,
+      "price": 41,
+      "colors": "WRG",
+      "splash": ""
+    },
+    {
+      "name": "Gruul Ramp",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-gruul-ramp#paper",
+      "share": 0.2,
+      "decks": 5,
+      "price": 58,
+      "colors": "RG",
+      "splash": ""
+    },
+    {
+      "name": "4c Synthesizer",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-4c-synthesizer-f5246896-123e-417c-9560-63c3c542a0da#paper",
+      "share": 0.2,
+      "decks": 5,
+      "price": 142,
+      "colors": "WUBR",
+      "splash": ""
+    },
+    {
+      "name": "Mono Red Pingers",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-red-pingers#paper",
+      "share": 0.2,
+      "decks": 5,
+      "price": 89,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Poison Storm",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-poison-storm#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 142,
+      "colors": "UBRG",
+      "splash": ""
+    },
+    {
+      "name": "Infect",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-infect-09cfa92b-ebe6-4cfb-be11-6f64e5cb7bf6#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 83,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Devotion",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-devotion#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 44,
+      "colors": "B",
+      "splash": ""
+    },
+    {
+      "name": "Walls Combo",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-walls-combo#paper",
+      "share": 0.2,
+      "decks": 4,
+      "price": 41,
+      "colors": "WUBRG",
+      "splash": ""
+    },
+    {
+      "name": "Kiln Fiend",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-kiln-fiend#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 73,
+      "colors": "R",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-azorius-affinity#paper",
+      "share": 0.1,
+      "decks": 3,
+      "price": 106,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Faeries",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-izzet-faeries#paper",
+      "share": 0.1,
+      "decks": 2,
+      "price": 90,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Temur Delver",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-temur-delver#paper",
+      "share": 0.1,
+      "decks": 2,
+      "price": 56,
+      "colors": "URG",
+      "splash": ""
+    },
+    {
+      "name": "Goblins",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-goblins#paper",
+      "share": 0.1,
+      "decks": 2,
+      "price": 57,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Selesnya Gates",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-selesnya-gates#paper",
+      "share": 0.1,
+      "decks": 1,
+      "price": 107,
+      "colors": "WG",
+      "splash": ""
+    },
+    {
+      "name": "Esper Faeries",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-esper-faeries#paper",
+      "share": 0.1,
+      "decks": 1,
+      "price": 130,
+      "colors": "WUB",
+      "splash": ""
+    },
+    {
+      "name": "Mono-Green Ramp",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-mono-green-ramp#paper",
+      "share": 0.1,
+      "decks": 1,
+      "price": 47,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Jund Reanimator",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-jund-reanimator#paper",
+      "share": 0.1,
+      "decks": 1,
+      "price": 62,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Jeskai Affinity",
+      "href": "https://www.mtggoldfish.com/archetype/pauper-jeskai-affinity-de7a3292-fefc-4cb7-857f-d257a6d0b7f3#paper",
+      "share": 0.1,
+      "decks": 1,
+      "price": 136,
+      "colors": "WUR",
+      "splash": ""
+    }
+  ]
+}
