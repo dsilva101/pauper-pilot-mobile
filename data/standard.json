@@ -1,0 +1,140 @@
+{
+  "fetchedAt": "2026-11-14T13:34:43.696Z",
+  "archetypes": [
+    {
+      "name": "Mono-Green Landfall",
+      "href": "https://www.mtggoldfish.com/archetype/standard-mono-green-landfall-woe#paper",
+      "share": 11.9,
+      "decks": 442,
+      "price": 248,
+      "colors": "G",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Midrange",
+      "href": "https://www.mtggoldfish.com/archetype/standard-dimir-midrange-woe#paper",
+      "share": 10,
+      "decks": 370,
+      "price": 314,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Jund Sacrifice",
+      "href": "https://www.mtggoldfish.com/archetype/standard-jund-sacrifice-woe#paper",
+      "share": 9.3,
+      "decks": 344,
+      "price": 253,
+      "colors": "BRG",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Reanimator",
+      "href": "https://www.mtggoldfish.com/archetype/standard-dimir-reanimator-woe#paper",
+      "share": 8.4,
+      "decks": 311,
+      "price": 454,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Lifegain",
+      "href": "https://www.mtggoldfish.com/archetype/standard-lifegain-woe#paper",
+      "share": 7.6,
+      "decks": 282,
+      "price": 272,
+      "colors": "WUBG",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Spellementals",
+      "href": "https://www.mtggoldfish.com/archetype/standard-izzet-spellementals-woe#paper",
+      "share": 5.9,
+      "decks": 218,
+      "price": 232,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Control",
+      "href": "https://www.mtggoldfish.com/archetype/standard-azorius-control-woe#paper",
+      "share": 5.4,
+      "decks": 200,
+      "price": 391,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "4c Control",
+      "href": "https://www.mtggoldfish.com/archetype/standard-4c-control-woe#paper",
+      "share": 4.4,
+      "decks": 163,
+      "price": 331,
+      "colors": "WUBR",
+      "splash": ""
+    },
+    {
+      "name": "Jeskai Artifacts",
+      "href": "https://www.mtggoldfish.com/archetype/standard-jeskai-artifacts-woe#paper",
+      "share": 4.3,
+      "decks": 159,
+      "price": 428,
+      "colors": "WUR",
+      "splash": ""
+    },
+    {
+      "name": "Boros Dwarves",
+      "href": "https://www.mtggoldfish.com/archetype/standard-boros-dwarves-woe#paper",
+      "share": 3.5,
+      "decks": 129,
+      "price": 385,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Azorius Momo",
+      "href": "https://www.mtggoldfish.com/archetype/standard-azorius-momo-woe#paper",
+      "share": 3.4,
+      "decks": 128,
+      "price": 375,
+      "colors": "WU",
+      "splash": ""
+    },
+    {
+      "name": "Boros Dragons",
+      "href": "https://www.mtggoldfish.com/archetype/standard-boros-dragons-woe#paper",
+      "share": 3.2,
+      "decks": 120,
+      "price": 452,
+      "colors": "WR",
+      "splash": ""
+    },
+    {
+      "name": "Izzet Prowess",
+      "href": "https://www.mtggoldfish.com/archetype/standard-izzet-prowess-woe#paper",
+      "share": 2.4,
+      "decks": 91,
+      "price": 221,
+      "colors": "UR",
+      "splash": ""
+    },
+    {
+      "name": "Dimir Control",
+      "href": "https://www.mtggoldfish.com/archetype/standard-dimir-control-woe#paper",
+      "share": 1.8,
+      "decks": 65,
+      "price": 360,
+      "colors": "UB",
+      "splash": ""
+    },
+    {
+      "name": "Selesnya Landfall",
+      "href": "https://www.mtggoldfish.com/archetype/standard-selesnya-landfall-woe#paper",
+      "share": 1.7,
+      "decks": 63,
+      "price": 292,
+      "colors": "WG",
+      "splash": ""
+    }
+  ]
+}

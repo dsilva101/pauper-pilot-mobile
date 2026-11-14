@@ -1,29 +1,331 @@
-const PAUPER_SOURCE = 'https://pauperpilot.com';
-const STANDARD_SOURCE = 'https://www.mtggoldfish.com/metagame/standard#paper';
+let activeFormat = 'pauper';
+const FORMATS = {
+  pauper: {source: 'https://pauperpilot.com', name: 'PauperPilot', currency: 'EUR'},
+  standard: {source: 'https://www.mtggoldfish.com', name: 'MTGGoldfish', currency: 'USD'}
+};
+function formatConfig() { return FORMATS[activeFormat]; }
 const PROXY = 'https://api.allorigins.win/raw?url=';
 const ROUTES = {'30d': '/', '7d': '/7d/', '90d': '/90d/', bnr: '/bnr/', set: '/set/'};
-const STANDARD_DECKS = [
-  ['Mono-Green Landfall',11.9,442,248,'G','standard-mono-green-landfall-woe'],['Dimir Midrange',10,370,314,'UB','standard-dimir-midrange-woe'],['Jund Sacrifice',9.3,344,253,'BRG','standard-jund-sacrifice-woe'],['Dimir Reanimator',8.4,311,454,'UB','standard-dimir-reanimator-woe'],['Lifegain',7.6,282,272,'WB','standard-lifegain-woe'],['Izzet Spellementals',5.9,218,232,'UR','standard-izzet-spellementals-woe'],['Azorius Control',5.4,200,391,'WU','standard-azorius-control-woe'],['4c Control',4.4,163,331,'WUBR','standard-4c-control-woe'],['Jeskai Artifacts',4.3,159,428,'WUR','standard-jeskai-artifacts-woe'],['Boros Dwarves',3.5,129,385,'WR','standard-boros-dwarves-woe'],['Azorius Momo',3.4,128,375,'WU','standard-azorius-momo-woe'],['Boros Dragons',3.2,120,452,'WR','standard-boros-dragons-woe'],['Izzet Prowess',2.4,91,221,'UR','standard-izzet-prowess-woe'],['Dimir Control',1.8,65,360,'UB','standard-dimir-control-woe'],['Selesnya Landfall',1.7,63,292,'WG','standard-selesnya-landfall-woe']
-].map(([name,share,decks,price,colors,slug]) => ({name,share,decks,price,colors,splash:'',href:`https://www.mtggoldfish.com/archetype/${slug}`}));
+const status = document.querySelector('#status');
+const rows = document.querySelector('#rows');
+const period = document.querySelector('#period');
+const refresh = document.querySelector('#refresh');
+const favoritesOnly = document.querySelector('#favorites-only');
+const money = new Intl.NumberFormat('en-IE', {style: 'currency', currency: 'EUR'});
+const COLOR_NAMES = {W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green'};
+let activeRequest;
+let currentItems = [];
+function favoritesKey() { return `${activeFormat}-meta-favorites-v1`; }
+function readFavorites() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(favoritesKey()));
+    return new Set(Array.isArray(saved) ? saved.filter(value => typeof value === 'string') : []);
+  } catch { return new Set(); }
+}
+let favorites = readFavorites();
+function saveFavorites() {
+  try { localStorage.setItem(favoritesKey(), JSON.stringify([...favorites])); } catch { /* Storage may be disabled. */ }
+}
+function favoriteKey(deck) { return deck.name.trim().toLocaleLowerCase(); }
 
-const status = document.querySelector('#status'), rows = document.querySelector('#rows'), period = document.querySelector('#period'), refresh = document.querySelector('#refresh'), favoritesOnly = document.querySelector('#favorites-only');
-const money = new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR'}), dollars = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
-const COLOR_NAMES = {W:'White',U:'Blue',B:'Black',R:'Red',G:'Green'};
-let activeRequest, currentItems = [], activeFormat = 'pauper', favorites = readFavorites();
-function isStandard(){ return activeFormat === 'standard'; }
-function source(){ return isStandard() ? STANDARD_SOURCE : PAUPER_SOURCE; }
-function favoriteStorage(){ return isStandard() ? 'standard-meta-favorites-v1' : 'pauper-meta-favorites-v1'; }
-function readFavorites(){ try { const saved=JSON.parse(localStorage.getItem(favoriteStorage())); return new Set(Array.isArray(saved)?saved.filter(value=>typeof value==='string'):[]); } catch { return new Set(); } }
-function saveFavorites(){ try { localStorage.setItem(favoriteStorage(),JSON.stringify([...favorites])); } catch {} }
-function favoriteKey(deck){ return deck.name.trim().toLocaleLowerCase(); }
-function deckURL(href){ const url=new URL(href,source()); if (isStandard()) { if(url.origin !== 'https://www.mtggoldfish.com'||!/^\/archetype\/[-a-z0-9]+$/.test(url.pathname)) throw new Error('Invalid Standard archetype URL'); } else if(url.origin!==PAUPER_SOURCE||!/^\/(?:7d\/|90d\/|bnr\/|set\/)?archetypes\/[^/]+\/$/.test(url.pathname)||url.search||url.hash) throw new Error('Invalid archetype URL'); return url.href; }
-function validate(items){ if(!Array.isArray(items)||!items.length) throw new Error('No archetypes found'); const seen=new Set(); for(const item of items){ if(!item||typeof item.name!=='string'||!item.name.trim()||!Number.isFinite(item.share)||item.share<0||item.share>100||(item.price!==null&&(!Number.isFinite(item.price)||item.price<0))||!Number.isSafeInteger(item.decks)||item.decks<0||typeof item.colors!=='string'||!/^[WUBRG]*$/.test(item.colors)||typeof item.splash!=='string'||!/^[WUBRG]*$/.test(item.splash)) throw new Error('Invalid archetype data'); const url=deckURL(item.href); if(seen.has(url)) throw new Error('Duplicate archetype'); seen.add(url); } return items; }
-function parsePauperTable(html){ const template=document.createElement('template'); template.innerHTML=html; const items=[]; for(const row of template.content.querySelectorAll('tbody tr[data-meta-row]')){ const link=row.querySelector('a[href]'); if(!link) continue; const deckCount=row.cells[3]?.textContent.trim().replace(/,/g,''); items.push({name:row.dataset.name||link.textContent.trim(),href:deckURL(link.getAttribute('href')),share:row.dataset.share?.trim()?Number(row.dataset.share):NaN,price:row.dataset.price?.trim()?Number(row.dataset.price):null,decks:/^\d+$/.test(deckCount||'')?Number(deckCount):NaN,colors:row.dataset.colors||'',splash:row.dataset.splash||'',incompletePrice:/≥/.test(row.textContent)}); } return validate(items); }
-function manaIcons(deck){ const icons=document.createElement('span'); icons.className='mana-icons'; icons.setAttribute('role','img'); const main=[...deck.colors].filter(color=>!deck.splash.includes(color)), splash=[...deck.splash]; icons.setAttribute('aria-label',(main.map(color=>COLOR_NAMES[color]).join(' and ')||'Colorless')+(splash.length?`, splashing ${splash.map(color=>COLOR_NAMES[color]).join(' and ')}`:'')); for(const color of [...main,...splash]){ const icon=document.createElement('span'); icon.className=`mana mana-${color}${splash.includes(color)?' splash':''}`; const image=document.createElement('img'); image.src=`assets/mana-${color}.svg`; image.alt=''; image.width=12; image.height=12; icon.append(image); icons.append(icon); } return icons; }
-function render(items){ currentItems=items; const visible=favoritesOnly.checked?items.filter(deck=>favorites.has(favoriteKey(deck))):items, maxShare=Math.max(...items.map(deck=>deck.share),1); document.querySelector('#count').textContent=favoritesOnly.checked?`${visible.length} of ${items.length} archetypes`:`${items.length} archetypes`; const output=visible.map(deck=>{ const tr=document.createElement('tr'), starred=favorites.has(favoriteKey(deck)); if(starred) tr.classList.add('is-favorite'); const fav=document.createElement('td'), button=document.createElement('button'); fav.className='favorite-cell'; button.type='button'; button.className='favorite-toggle'; button.dataset.favoriteKey=favoriteKey(deck); button.setAttribute('aria-label',`${starred?'Remove':'Add'} ${deck.name} ${starred?'from':'to'} favorites`); button.setAttribute('aria-pressed',String(starred)); button.textContent=starred?'★':'☆'; fav.append(button); const colors=document.createElement('td'); colors.className='colors-cell'; colors.append(manaIcons(deck)); const name=document.createElement('td'); name.className='name-cell'; name.append(manaIcons(deck)); const link=document.createElement('a'); link.className='deck-link'; link.href=deckURL(deck.href); link.textContent=deck.name; name.append(link); const share=document.createElement('td'), layout=document.createElement('span'), track=document.createElement('span'), bar=document.createElement('span'), percent=document.createElement('span'), mainColors=[...deck.colors].filter(color=>!deck.splash.includes(color)); share.className='share-cell'; layout.className='share-layout'; track.className='share-track'; track.setAttribute('aria-hidden','true'); bar.className=`share-bar bar-${mainColors.length>1?'multi':mainColors[0]||'other'}`; bar.style.width=`${deck.share/maxShare*100}%`; percent.className='share'; percent.textContent=`${deck.share.toFixed(1)}%`; track.append(bar); layout.append(track,percent); share.append(layout); const decks=document.createElement('td'), price=document.createElement('td'); decks.className='decks'; price.className='price'; decks.textContent=deck.decks.toLocaleString(); price.textContent=deck.price===null?'—':`${deck.incompletePrice?'≥ ':''}${isStandard()?dollars.format(deck.price):money.format(deck.price)}`; tr.append(fav,colors,name,share,decks,price); return tr; }); if(favoritesOnly.checked&&!visible.length){ const tr=document.createElement('tr'), td=document.createElement('td'); td.className='favorite-empty'; td.colSpan=6; td.textContent=items.length?'No favorite decks yet. Tap a star to add a deck.':'No decks are available for this date range.'; tr.append(td); output.push(tr); } rows.replaceChildren(...output); }
-function readCache(key){ try { const cached=JSON.parse(localStorage.getItem(`pauper-meta-v2:${key}`)); if(!cached||!Number.isFinite(Date.parse(cached.fetchedAt))) return null; validate(cached.archetypes); return cached; } catch { return null; } }
-async function loadPauper(){ activeRequest?.abort(); const controller=new AbortController(); activeRequest=controller; const key=period.value,cached=readCache(key),timestamp=snapshot=>new Date(snapshot.fetchedAt).toLocaleString(); if(cached) render(cached.archetypes); else { rows.replaceChildren(); document.querySelector('#count').textContent=''; } status.textContent=cached?'Showing saved data · Checking for updates…':'Loading PauperPilot via AllOrigins…'; rows.closest('table').setAttribute('aria-busy','true'); const timer=setTimeout(()=>controller.abort(),30000); try { const response=await fetch(PROXY+encodeURIComponent(PAUPER_SOURCE+ROUTES[key]),{signal:controller.signal,credentials:'omit'}); if(!response.ok) throw new Error(`Proxy returned ${response.status}`); const archetypes=parsePauperTable(await response.text()); if(activeRequest!==controller) return; const snapshot={archetypes,fetchedAt:new Date().toISOString()}; try { localStorage.setItem(`pauper-meta-v2:${key}`,JSON.stringify(snapshot)); } catch {} render(archetypes); status.textContent=`Retrieved ${timestamp(snapshot)} · Proxy data may be cached`; } catch(error) { if(activeRequest!==controller) return; status.textContent=cached?`Could not refresh · Showing saved data retrieved ${timestamp(cached)}`:'Could not load data through AllOrigins. Tap Refresh to retry, or open PauperPilot below.'; console.warn('PauperPilot refresh failed:',error); } finally { clearTimeout(timer); if(activeRequest===controller) rows.closest('table').setAttribute('aria-busy','false'); } }
-function load(){ if(!isStandard()) return loadPauper(); render(validate(STANDARD_DECKS)); status.textContent='MTGGoldfish Tabletop metagame snapshot · Nov 14, 2026'; }
-function setFormat(format){ activeRequest?.abort(); activeRequest=undefined; rows.closest('table').setAttribute('aria-busy','false'); activeFormat=format; favorites=readFavorites(); const standard=isStandard(); document.title=`${standard?'Standard':'Pauper'} · Mobile Meta`; document.querySelector('#eyebrow').textContent=`THE ${standard?'STANDARD':'PAUPER'} METAGAME`; document.querySelector('#subtitle').textContent=standard?'The most played Standard archetypes, at a glance.':'The most played archetypes, at a glance.'; period.hidden=standard; document.querySelectorAll('.format-tab').forEach(tab=>{const selected=tab.dataset.format===format;tab.classList.toggle('is-active',selected);tab.setAttribute('aria-pressed',String(selected));}); const sourceLink=document.querySelector('#source-link'); sourceLink.href=source(); sourceLink.innerHTML=`Visit ${standard?'MTGGoldfish':'PauperPilot'} <span aria-hidden="true">↗</span>`; document.querySelector('#footer-copy').innerHTML=`Tap any row to explore its archetype on <a href="${source()}">${standard?'MTGGoldfish':'PauperPilot'} <span aria-hidden="true">↗</span></a>.`; document.querySelector('#footer-note').innerHTML=standard?'Standard data from <a href="https://www.mtggoldfish.com/metagame/standard#paper">MTGGoldfish</a> · Mana symbols by <a href="https://mana.andrewgioia.com/">Mana</a> · Unofficial fan project':'Data via <a href="https://allorigins.win/">AllOrigins</a> · Mana symbols by <a href="https://mana.andrewgioia.com/">Mana</a> · Unofficial fan project'; load(); }
-function openRow(event){ if(event.defaultPrevented||event.target.closest('a, button')||(event.type==='click'?event.button!==0:event.button!==1)||!window.getSelection().isCollapsed) return; const link=event.target.closest('tr')?.querySelector('.deck-link'); if(!link) return; if(event.button===1||event.ctrlKey||event.metaKey||event.shiftKey){event.preventDefault();window.open(link.href,'_blank','noopener');}else link.click(); }
-rows.addEventListener('click',openRow); rows.addEventListener('auxclick',openRow); rows.addEventListener('click',event=>{const button=event.target.closest('.favorite-toggle');if(!button)return;const deck=currentItems.find(item=>favoriteKey(item)===button.dataset.favoriteKey);if(!deck)return;const key=favoriteKey(deck);if(favorites.has(key))favorites.delete(key);else favorites.add(key);saveFavorites();render(currentItems);}); favoritesOnly.addEventListener('change',()=>render(currentItems)); period.addEventListener('change',load); refresh.addEventListener('click',load); document.querySelectorAll('.format-tab').forEach(tab=>tab.addEventListener('click',()=>setFormat(tab.dataset.format))); load();
+function archetypeURL(href) {
+  const url = new URL(href, formatConfig().source);
+  const validPath = activeFormat === 'standard'
+    ? /^\/archetype\/[-a-z0-9]+$/.test(url.pathname)
+    : /^\/(?:7d\/|90d\/|bnr\/|set\/)?archetypes\/[^/]+\/$/.test(url.pathname);
+  if (url.origin !== formatConfig().source || !validPath || url.search || (url.hash && !(activeFormat === 'standard' && url.hash === '#paper'))) {
+    throw new Error('Invalid archetype URL');
+  }
+  return url.href;
+}
+
+function validate(items) {
+  if (!Array.isArray(items) || !items.length) throw new Error('No archetypes found');
+  const seen = new Set();
+  for (const item of items) {
+    if (!item || typeof item.name !== 'string' || !item.name.trim() ||
+        !Number.isFinite(item.share) || item.share < 0 || item.share > 100 ||
+        (item.price !== null && (!Number.isFinite(item.price) || item.price < 0)) ||
+        !Number.isSafeInteger(item.decks) || item.decks < 0 ||
+        typeof item.colors !== 'string' || !/^[WUBRG]*$/.test(item.colors) ||
+        typeof item.splash !== 'string' || !/^[WUBRG]*$/.test(item.splash)) {
+      throw new Error('Invalid archetype data');
+    }
+    const url = archetypeURL(item.href);
+    if (seen.has(url)) throw new Error('Duplicate archetype');
+    seen.add(url);
+  }
+  return items;
+}
+
+function parseTable(html) {
+  // Parse in an inert template. Remote scripts and markup never enter the page.
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const items = [];
+  for (const row of template.content.querySelectorAll('tbody tr[data-meta-row]')) {
+    const link = row.querySelector('a[href]');
+    if (!link) continue; // The aggregate "Other" row has no destination.
+    const deckCount = row.cells[3]?.textContent.trim().replace(/,/g, '');
+    items.push({
+      name: row.dataset.name || link.textContent.trim(),
+      href: archetypeURL(link.getAttribute('href')),
+      share: row.dataset.share?.trim() ? Number(row.dataset.share) : NaN,
+      price: row.dataset.price?.trim() ? Number(row.dataset.price) : null,
+      decks: /^\d+$/.test(deckCount || '') ? Number(deckCount) : NaN,
+      colors: row.dataset.colors || '',
+      splash: row.dataset.splash || '',
+      incompletePrice: /≥/.test(row.textContent)
+    });
+  }
+  return validate(items);
+}
+
+function parseStandard(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const items = [];
+  for (const tile of template.content.querySelectorAll('#metagame-decks-container .archetype-tile')) {
+    const link = tile.querySelector('.archetype-tile-title .deck-price-paper a');
+    const stats = tile.querySelector('.metagame-percentage .archetype-tile-statistic-value')?.textContent;
+    const match = stats?.match(/([\d.]+)\s*%\s*\(([\d,]+)\)/);
+    if (!link || !match) throw new Error('Invalid Standard metagame tile');
+    const priceText = tile.querySelector('.archetype-tile-statistic.deck-price-paper .archetype-tile-statistic-value')?.textContent;
+    const priceMatch = priceText?.match(/\$\s*([\d,]+(?:\.\d+)?)/);
+    const colors = [...tile.querySelectorAll('.manacost .ms')]
+      .map(icon => [...icon.classList].find(name => /^ms-[wubrg]$/.test(name))?.slice(3).toUpperCase())
+      .filter(Boolean);
+    items.push({
+      name: link.textContent.trim(), href: archetypeURL(link.getAttribute('href')),
+      share: Number(match[1]), decks: Number(match[2].replace(/,/g, '')),
+      price: priceMatch ? Number(priceMatch[1].replace(/,/g, '')) : null,
+      colors: [...new Set(colors)].join(''), splash: ''
+    });
+  }
+  return validate(items).sort((a, b) => b.share - a.share || b.decks - a.decks);
+}
+
+function manaIcons(deck) {
+  const icons = document.createElement('span');
+  icons.className = 'mana-icons';
+  icons.setAttribute('role', 'img');
+  const main = [...deck.colors].filter(color => !deck.splash.includes(color));
+  const splash = [...deck.splash];
+  const label = main.map(color => COLOR_NAMES[color]).join(' and ') || 'Colorless';
+  icons.setAttribute('aria-label', label + (splash.length ? `, splashing ${splash.map(color => COLOR_NAMES[color]).join(' and ')}` : ''));
+  for (const color of [...main, ...splash]) {
+    const icon = document.createElement('span');
+    icon.className = `mana mana-${color}${splash.includes(color) ? ' splash' : ''}`;
+    const image = document.createElement('img');
+    image.src = `assets/mana-${color}.svg`;
+    image.alt = '';
+    image.width = 12;
+    image.height = 12;
+    icon.append(image);
+    icons.append(icon);
+  }
+  return icons;
+}
+
+function render(items) {
+  currentItems = items;
+  const visibleItems = favoritesOnly.checked ? items.filter(deck => favorites.has(favoriteKey(deck))) : items;
+  const maxShare = Math.max(...items.map(deck => deck.share), 1);
+  document.querySelector('#count').textContent = favoritesOnly.checked
+    ? `${visibleItems.length} of ${items.length} archetypes`
+    : `${items.length} archetypes`;
+  const renderedRows = visibleItems.map(deck => {
+    const tr = document.createElement('tr');
+    const isFavorite = favorites.has(favoriteKey(deck));
+    if (isFavorite) tr.classList.add('is-favorite');
+    const favoriteCell = document.createElement('td');
+    favoriteCell.className = 'favorite-cell';
+    const favoriteButton = document.createElement('button');
+    favoriteButton.type = 'button';
+    favoriteButton.className = 'favorite-toggle';
+    favoriteButton.dataset.favoriteKey = favoriteKey(deck);
+    favoriteButton.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${deck.name} ${isFavorite ? 'from' : 'to'} favorites`);
+    favoriteButton.setAttribute('aria-pressed', String(isFavorite));
+    favoriteButton.textContent = isFavorite ? '★' : '☆';
+    favoriteCell.append(favoriteButton);
+    const colors = document.createElement('td');
+    colors.className = 'colors-cell';
+    colors.append(manaIcons(deck));
+    const name = document.createElement('td');
+    name.className = 'name-cell';
+    name.append(manaIcons(deck));
+    const link = document.createElement('a');
+    link.className = 'deck-link';
+    link.href = archetypeURL(deck.href);
+    link.textContent = deck.name;
+    name.append(link);
+    const share = document.createElement('td');
+    share.className = 'share-cell';
+    const shareLayout = document.createElement('span');
+    shareLayout.className = 'share-layout';
+    const track = document.createElement('span');
+    track.className = 'share-track';
+    track.setAttribute('aria-hidden', 'true');
+    const bar = document.createElement('span');
+    const mainColors = [...deck.colors].filter(color => !deck.splash.includes(color));
+    bar.className = `share-bar bar-${mainColors.length > 1 ? 'multi' : mainColors[0] || 'other'}`;
+    bar.style.width = `${deck.share / maxShare * 100}%`;
+    track.append(bar);
+    const percent = document.createElement('span');
+    percent.className = 'share';
+    percent.textContent = `${deck.share.toFixed(1)}%`;
+    shareLayout.append(track, percent);
+    share.append(shareLayout);
+    const decks = document.createElement('td');
+    decks.className = 'decks';
+    decks.textContent = deck.decks.toLocaleString();
+    const price = document.createElement('td');
+    price.className = 'price';
+    const currency = activeFormat === 'standard'
+      ? new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}) : money;
+    price.textContent = deck.price === null ? '—' : `${deck.incompletePrice ? '≥ ' : ''}${currency.format(deck.price)}`;
+    tr.append(favoriteCell, colors, name, share, decks, price);
+    return tr;
+  });
+  if (favoritesOnly.checked && visibleItems.length === 0) {
+    const emptyRow = document.createElement('tr');
+    const emptyCell = document.createElement('td');
+    emptyCell.className = 'favorite-empty';
+    emptyCell.colSpan = 6;
+    emptyCell.textContent = items.length
+      ? 'No favorite decks yet. Tap a star to add a deck.'
+      : 'No decks are available for this date range.';
+    emptyRow.append(emptyCell);
+    renderedRows.push(emptyRow);
+  }
+  rows.replaceChildren(...renderedRows);
+}
+
+function cacheKey(key) {
+  return activeFormat === 'standard' ? 'standard-meta-v1:paper' : `pauper-meta-v2:${key}`;
+}
+
+function readCache(key) {
+  try {
+    const cached = JSON.parse(localStorage.getItem(cacheKey(key)));
+    if (!cached || !Number.isFinite(Date.parse(cached.fetchedAt))) return null;
+    validate(cached.archetypes);
+    return cached;
+  } catch { return null; }
+}
+
+async function load() {
+  activeRequest?.abort();
+  const controller = new AbortController();
+  activeRequest = controller;
+  const key = period.value;
+  let cached = readCache(key);
+  if (!cached && activeFormat === 'standard') {
+    try {
+      const response = await fetch('data/standard.json', {signal: controller.signal});
+      if (!response.ok) throw new Error('Snapshot unavailable');
+      const bundled = await response.json();
+      if (activeRequest !== controller) return;
+      validate(bundled.archetypes);
+      if (!Number.isFinite(Date.parse(bundled.fetchedAt))) throw new Error('Invalid snapshot date');
+      cached = bundled;
+    } catch { /* Live retrieval can still succeed without the bundled snapshot. */ }
+    if (activeRequest !== controller) return;
+  }
+  const timestamp = snapshot => new Date(snapshot.fetchedAt).toLocaleString();
+  if (cached) render(cached.archetypes);
+  else {
+    render([]);
+    document.querySelector('#count').textContent = '';
+  }
+  const config = formatConfig();
+  const standard = activeFormat === 'standard';
+  status.textContent = cached ? 'Showing saved data · Checking for updates…' : `Loading ${config.name} data…`;
+  rows.closest('table').setAttribute('aria-busy', 'true');
+  const timer = setTimeout(() => controller.abort(), 30000);
+  try {
+    const path = standard ? '/metagame/standard' : ROUTES[key];
+    const response = await fetch(PROXY + encodeURIComponent(config.source + path), {
+      signal: controller.signal, credentials: 'omit'
+    });
+    if (!response.ok) throw new Error(`Proxy returned ${response.status}`);
+    const html = await response.text();
+    if (activeRequest !== controller) return;
+    const archetypes = standard ? parseStandard(html) : parseTable(html);
+    const snapshot = {archetypes, fetchedAt: new Date().toISOString()};
+    try { localStorage.setItem(cacheKey(key), JSON.stringify(snapshot)); } catch { /* Storage may be disabled. */ }
+    render(archetypes);
+    status.textContent = `Retrieved ${timestamp(snapshot)} · Proxy data may be cached`;
+  } catch (error) {
+    if (activeRequest !== controller) return;
+    status.textContent = cached
+      ? `Could not refresh · Showing saved data retrieved ${timestamp(cached)}`
+      : `Could not load data. Tap Refresh to retry, or open ${config.name} below.`;
+    console.warn(`${config.name} refresh failed:`, error);
+  } finally {
+    clearTimeout(timer);
+    if (activeRequest === controller) rows.closest('table').setAttribute('aria-busy', 'false');
+  }
+}
+
+// Table row positioning varies between browsers; handle clicks on every cell
+// explicitly while keeping the real link for keyboard and context-menu access.
+function openRow(event) {
+  if (event.defaultPrevented || event.target.closest('a, button') ||
+      (event.type === 'click' ? event.button !== 0 : event.button !== 1) ||
+      !window.getSelection().isCollapsed) return;
+  const link = event.target.closest('tr')?.querySelector('.deck-link');
+  if (!link) return;
+  if (event.button === 1 || event.ctrlKey || event.metaKey || event.shiftKey) {
+    event.preventDefault();
+    window.open(link.href, '_blank', 'noopener');
+  } else {
+    link.click();
+  }
+}
+
+rows.addEventListener('click', openRow);
+rows.addEventListener('auxclick', openRow);
+rows.addEventListener('click', event => {
+  const button = event.target.closest('.favorite-toggle');
+  if (!button) return;
+  const deck = currentItems.find(item => favoriteKey(item) === button.dataset.favoriteKey);
+  if (!deck) return;
+  const key = favoriteKey(deck);
+  if (favorites.has(key)) favorites.delete(key); else favorites.add(key);
+  saveFavorites();
+  render(currentItems);
+});
+favoritesOnly.addEventListener('change', () => render(currentItems));
+function selectFormat() {
+  activeRequest?.abort();
+  activeRequest = undefined;
+  activeFormat = location.hash === '#standard' ? 'standard' : 'pauper';
+  favorites = readFavorites();
+  favoritesOnly.checked = false;
+  const config = formatConfig();
+  const standard = activeFormat === 'standard';
+  document.title = `${standard ? 'Standard' : 'Pauper'} · Mobile Meta`;
+  document.querySelector('#eyebrow').textContent = `THE ${activeFormat.toUpperCase()} METAGAME`;
+  document.querySelector('#subtitle').textContent = standard
+    ? 'The most played Standard archetypes, at a glance.' : 'The most played archetypes, at a glance.';
+  period.hidden = standard;
+  for (const tab of document.querySelectorAll('.format-tab')) {
+    const selected = tab.dataset.format === activeFormat;
+    tab.classList.toggle('is-active', selected);
+    tab.setAttribute('aria-pressed', String(selected));
+  }
+  for (const link of document.querySelectorAll('#source-link, #footer-source')) {
+    link.href = config.source + (standard ? '/metagame/standard#paper' : '/');
+    link.textContent = `${link.id === 'source-link' ? 'Visit ' : ''}${config.name} ↗`;
+  }
+  load();
+}
+document.querySelectorAll('.format-tab').forEach(tab => tab.addEventListener('click', () => {
+  const hash = `#${tab.dataset.format}`;
+  if (location.hash === hash) selectFormat(); else location.hash = hash;
+}));
+window.addEventListener('hashchange', selectFormat);
+period.addEventListener('change', load);
+refresh.addEventListener('click', load);
+selectFormat();
