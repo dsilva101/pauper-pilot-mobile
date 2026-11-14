@@ -4,21 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <title>PauperPilot · Mobile Meta</title>
-  <link rel="stylesheet" href="styles.css?v=9a855ed">
-  <script src="app.js?v=9a855ed" defer></script>
+  <title>Pauper · Mobile Meta</title>
+  <link rel="stylesheet" href="styles.css?v=standard-meta-1">
+  <script src="app.js?v=standard-meta-1" defer></script>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="./" aria-label="PauperPilot Mobile Meta home"><span class="brand-mark" aria-hidden="true">P</span><span>PauperPilot <span class="brand-note">/ Mobile Meta</span></span></a>
-      <a class="source-link" href="https://pauperpilot.com/">Visit PauperPilot <span aria-hidden="true">↗</span></a>
+      <a class="brand" href="./" aria-label="Mobile Meta home"><span class="brand-mark" aria-hidden="true">M</span><span>Mobile Meta</span></a>
+      <nav class="format-tabs" aria-label="Format"><button class="format-tab is-active" type="button" data-format="pauper" aria-pressed="true">Pauper</button><button class="format-tab" type="button" data-format="standard" aria-pressed="false">Standard</button></nav>
+      <a id="source-link" class="source-link" href="https://pauperpilot.com/">Visit PauperPilot <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main>
     <section class="intro" aria-labelledby="title">
-      <div><p class="eyebrow">THE PAUPER METAGAME</p><h1 id="title">Know the field.</h1><p class="subtitle">The most played archetypes, at a glance.</p></div>
-      <div class="toolbar"><label for="period" class="sr-only">Date range</label><select id="period"><option value="30d">Last 30 days</option><option value="7d">Last 7 days</option><option value="90d">Last 90 days</option><option value="bnr">Since B&amp;R</option><option value="set">Since set</option></select><button id="refresh" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 11-1l3 6M4 12l3 6a7 7 0 0 0 11-1"/></svg><span>Refresh</span></button></div>
+      <div><p id="eyebrow" class="eyebrow">THE PAUPER METAGAME</p><h1 id="title">Know the field.</h1><p id="subtitle" class="subtitle">The most played archetypes, at a glance.</p></div>
+      <div class="toolbar"><label for="period" class="sr-only">Date range</label><select id="period"><option value="30d">Last 30 days</option><option value="7d">Last 7 days</option><option value="90d">Last 90 days</option><option value="bnr">Since B&amp;R</option><option value="set">Since set</option></select><button id="refresh" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 7v5h5"/><path d="M6 7a7 7 0 0 1 11-1l3 6M4 12l3 6a7 7 0 0 0 11-1"/></svg><span>Refresh</span></button></div>
     </section>
     <section aria-labelledby="table-title">
       <div class="table-heading"><h2 id="table-title">Archetype popularity</h2><div class="table-controls"><label class="favorites-filter"><input id="favorites-only" type="checkbox"> Favorites only</label><span id="count"></span></div></div>
@@ -29,9 +30,9 @@
           <tbody id="rows"></tbody>
         </table>
       </div>
-      <p id="status" class="status" role="status">Loading PauperPilot data…</p>
+      <p id="status" class="status" role="status">Loading Pauper data…</p>
     </section>
-    <footer><p>Tap any row to explore its archetype on <a href="https://pauperpilot.com/">PauperPilot <span aria-hidden="true">↗</span></a>.</p><p>Data via <a href="https://allorigins.win/">AllOrigins</a> · Mana symbols by <a href="https://mana.andrewgioia.com/">Mana</a> · Unofficial fan project</p></footer>
+    <footer><p id="footer-copy">Tap any row to explore its archetype on <a href="https://pauperpilot.com/">PauperPilot <span aria-hidden="true">↗</span></a>.</p><p id="footer-note">Data via <a href="https://allorigins.win/">AllOrigins</a> · Mana symbols by <a href="https://mana.andrewgioia.com/">Mana</a> · Unofficial fan project</p></footer>
   </main>
 </body>
 </html>
